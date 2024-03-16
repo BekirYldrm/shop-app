@@ -1,4 +1,4 @@
-package com.pinsoft.shopapp.business;
+package com.pinsoft.shopapp.controller;
 
 import com.pinsoft.shopapp.entity.Role;
 import com.pinsoft.shopapp.service.RoleService;

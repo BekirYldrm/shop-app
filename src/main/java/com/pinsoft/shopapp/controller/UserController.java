@@ -1,4 +1,4 @@
-package com.pinsoft.shopapp.business;
+package com.pinsoft.shopapp.controller;
 
 import com.pinsoft.shopapp.entity.User;
 import com.pinsoft.shopapp.service.UserService;
