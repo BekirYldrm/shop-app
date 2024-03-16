@@ -1,7 +1,7 @@
 package com.pinsoft.shopapp.business;
 
 import com.pinsoft.shopapp.entity.Role;
-import com.pinsoft.shopapp.repository.RoleRepository;
+import com.pinsoft.shopapp.service.RoleService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,43 +11,32 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+
 @RestController
 public class RoleController {
 
+    private final RoleService roleService;
+
     @Autowired
-    private RoleRepository repository;
+    public RoleController(RoleService roleService) {
+        this.roleService = roleService;
+    }
 
     @Operation(tags = "List Roles", description = "Get All Roles", responses = {
-            @ApiResponse(description = "Success", responseCode = "200"
-
-            ), @ApiResponse(description = "Data Not Found", responseCode = "404"
-
-    ) })
-
-
-
-    @GetMapping("/getRole")
-    public List<Role> getAllRoles(){
-        return repository.findAll();
+            @ApiResponse(description = "Success", responseCode = "200"),
+            @ApiResponse(description = "Data Not Found", responseCode = "404")
+    })
+    @GetMapping("/getAllRoles")
+    public List<Role> getAllRoles() {
+        return roleService.getAllRoles();
     }
 
-    @Operation(tags = "Select Roles", description = "Get All Roles", responses = {
-            @ApiResponse(description = "Success", responseCode = "200"
-
-            ), @ApiResponse(description = "Data Not Found", responseCode = "404"
-
-    ) })
-
+    @Operation(tags = "Select Roles", description = "Get Role by Name", responses = {
+            @ApiResponse(description = "Success", responseCode = "200"),
+            @ApiResponse(description = "Data Not Found", responseCode = "404")
+    })
     @GetMapping("/getRoleByName/{name}")
-    public Role getRole(@PathVariable String name){
-
-        var role = repository.findByName(name);
-
-        if(role.isEmpty()){
-            throw new RuntimeException("Role not found with name: "+role);
-        } else {
-            return role.get();
-        }
+    public List<Role> getRoleByName(@PathVariable String name) {
+        return roleService.getRoleByName(name);
     }
-
 }
