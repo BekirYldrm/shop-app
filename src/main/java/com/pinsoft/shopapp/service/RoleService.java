@@ -12,8 +12,7 @@ import java.util.List;
 public class RoleService {
 
     private final RoleRepository roleRepository;
-
-    @Autowired
+    
     public RoleService(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
     }
