@@ -15,9 +15,7 @@ public class CategoryController {
 
 	private final CategoryService categoryService;
 
-	public CategoryController(CategoryService categoryService) {
-		this.categoryService = categoryService;
-	}
+	public CategoryController(CategoryService categoryService) {this.categoryService = categoryService;}
 
 	@Operation(tags = "List Categories", description = "Get All Categories", responses = {
 			@ApiResponse(description = "Success", responseCode = "200"
