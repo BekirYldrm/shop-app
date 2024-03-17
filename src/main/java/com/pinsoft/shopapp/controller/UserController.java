@@ -17,7 +17,6 @@ public class UserController {
 
     private final UserService userService;
 
-    @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
@@ -31,12 +30,12 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @Operation(tags = "Select Users", description = "Get User by Username", responses = {
+    @Operation(tags = "Select User", description = "Get User by Username", responses = {
             @ApiResponse(description = "Success", responseCode = "200"),
             @ApiResponse(description = "Data Not Found", responseCode = "404")
     })
     @GetMapping("/getUserByUsername/{username}")
-    public List<User> getUserByUsername(@PathVariable String username) {
+    public User getUserByUsername(@PathVariable String username) {
         return userService.getUserByUsername(username);
     }
 }
