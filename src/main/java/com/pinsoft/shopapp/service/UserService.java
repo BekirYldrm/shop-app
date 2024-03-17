@@ -19,7 +19,7 @@ public class UserService {
     public List<User> getAllUsers(){
         return userRepository.findAll();
     }
-    public List<User> getUserByUsername(String username){
+    public User getUserByUsername(String username){
         return userRepository.findAByUsername(username);
     }
 
