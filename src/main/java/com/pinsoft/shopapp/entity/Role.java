@@ -2,43 +2,26 @@ package com.pinsoft.shopapp.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.Getter;
 
 import java.util.List;
 
 @Entity
 @Table(name="role")
+@Data
 public class Role {
     @Id
-    @GeneratedValue
+    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String name;
 
+    @Getter
     @OneToMany(mappedBy = "role")
     @JsonManagedReference
+
     private List<User> users;
 
-    public List<User> getUsers(){
-        return users;
-    }
-    public void setUsers(List<User> users){
-        this.users= users;
-    }
-    public Role(){
-        super();
-    }
-
-    public Role(String name){
-        super();
-        this.name=name;
-    }
-    public int getId(){
-        return id;
-    }
-    public String getName(){
-        return name;
-    }
-
-    public void setName(String name){
-        this.name = name;
-    }
 }

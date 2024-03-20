@@ -39,8 +39,8 @@ public class CategoryController {
 	)})
 
 	@GetMapping("/category/{name}")
-	public Category getCategory(@PathVariable String name) {
+	public Category getCategoryByName(@PathVariable String name) {
 
-		return categoryService.getCategory(name);
+		return categoryService.getCategoryByName(name);
 	}
 }

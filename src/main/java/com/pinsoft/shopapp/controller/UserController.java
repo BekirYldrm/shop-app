@@ -1,13 +1,12 @@
 package com.pinsoft.shopapp.controller;
 
+import com.pinsoft.shopapp.entity.Role;
 import com.pinsoft.shopapp.entity.User;
 import com.pinsoft.shopapp.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,7 +14,8 @@ import java.util.List;
 @RestController
 public class UserController {
 
-    private final UserService userService;
+    @Autowired
+    private UserService userService;
 
     public UserController(UserService userService) {
         this.userService = userService;
@@ -25,7 +25,7 @@ public class UserController {
             @ApiResponse(description = "Success", responseCode = "200"),
             @ApiResponse(description = "Data Not Found", responseCode = "404")
     })
-    @GetMapping("/getAllUsers")
+    @GetMapping("/getAllUsers") // shortcut for @RequestMapping(method=RequestMethod.GET)
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
@@ -35,7 +35,17 @@ public class UserController {
             @ApiResponse(description = "Data Not Found", responseCode = "404")
     })
     @GetMapping("/getUserByUsername/{username}")
-    public User getUserByUsername(@PathVariable String username) {
+    public List<User> getUserByUsername(@PathVariable("username") String username) {
         return userService.getUserByUsername(username);
     }
+
+    @PostMapping("/addUser")
+    public String addUser(@RequestParam String username,
+                          @RequestParam String email,
+                          @RequestParam String roleName,
+                          @RequestParam String password) {
+        return userService.addUser(username, email, roleName, password);
+    }
+
+
 }

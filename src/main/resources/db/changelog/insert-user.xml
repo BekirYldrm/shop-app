@@ -11,7 +11,7 @@
 
     <changeSet id="3" author="fatih">
 
-        <insert tableName="users">
+        <insert tableName="user">
             <column name="id" valueNumeric="1" />
             <column name="email" value="abc@abc.com" />
             <column name="username" value="admin123"/>
@@ -20,7 +20,7 @@
 
         </insert>
 
-        <insert tableName="users">
+        <insert tableName="user">
             <column name="id" valueNumeric="2" />
             <column name="email" value="user2@gmail.com" />
             <column name="username" value="user234"/>

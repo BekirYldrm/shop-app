@@ -9,7 +9,7 @@
 
 <changeSet id="1" author="bekir">
 
-		<createTable tableName="categories">
+		<createTable tableName="category">
 
 			<column name="id" type="int" autoIncrement="true">
 				<constraints primaryKey="true" nullable="false"
@@ -22,7 +22,7 @@
 
 		</createTable>
 
-		<createTable tableName="products">
+		<createTable tableName="product">
 
 			<column name="id" type="int" autoIncrement="true">
 				<constraints primaryKey="true" nullable="false"
@@ -47,12 +47,18 @@
 
 		</createTable>
 
+	</changeSet>
+	<changeSet id="20241904-4" author="fatih">
 		<addForeignKeyConstraint
-			constraintName="category_fk" referencedTableName="categories"
-			baseColumnNames="category_id" baseTableName="products"
-			referencedColumnNames="id" />
-
-
-
+				baseTableName="product"
+				baseColumnNames="category_id"
+				constraintName="fk_product_category"
+				referencedTableName="category"
+				referencedColumnNames="id"
+				onDelete="CASCADE"
+				onUpdate="CASCADE"
+				deferrable="true"
+				initiallyDeferred="true"
+		/>
 	</changeSet>
 </databaseChangeLog>

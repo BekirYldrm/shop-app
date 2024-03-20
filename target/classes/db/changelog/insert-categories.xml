@@ -12,17 +12,17 @@
 
 	<changeSet id="2" author="bekir">
 
-		<insert tableName="categories">
+		<insert tableName="category">
 			<column name="id" valueNumeric="1" />
 			<column name="name" value="telephone" />
 		</insert>
 		
-		<insert tableName="categories">
+		<insert tableName="category">
 			<column name="id" valueNumeric="2" />
 			<column name="name" value="notebook" />
 		</insert>
 		
-		<insert tableName="categories">
+		<insert tableName="category">
 			<column name="id" valueNumeric="3" />
 			<column name="name" value="television" />
 		</insert>

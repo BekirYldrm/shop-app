@@ -34,7 +34,8 @@ public class RoleController {
             @ApiResponse(description = "Data Not Found", responseCode = "404")
     })
     @GetMapping("/getRoleByName/{name}")
-    public List<Role> getRoleByName(@PathVariable String name) {
+    public Role getRoleByName(@PathVariable String name) {
         return roleService.getRoleByName(name);
     }
+
 }

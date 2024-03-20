@@ -17,5 +17,6 @@
         <include file="/db/changelog/insert-role.xml"/>
         <include file="/db/changelog/insert-user.xml"/>
         <include file="/db/changelog/insert-user-v2.xml"/>
+        <include file="/db/changelog/base64-column.xml"/>
  
 </databaseChangeLog>
