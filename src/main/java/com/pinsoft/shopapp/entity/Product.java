@@ -13,7 +13,6 @@ import lombok.Data;
 @Data
 
 public class Product {
-
 	@Id
 	@SequenceGenerator(name = "product_seq", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +29,5 @@ public class Product {
 	@JoinColumn(name = "category_id", referencedColumnName = "id")
 	@JsonBackReference
 	private Category category;
-
-
 
 }

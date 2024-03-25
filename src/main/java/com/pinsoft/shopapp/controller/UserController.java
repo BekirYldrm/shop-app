@@ -1,6 +1,5 @@
 package com.pinsoft.shopapp.controller;
 
-import com.pinsoft.shopapp.entity.Role;
 import com.pinsoft.shopapp.entity.User;
 import com.pinsoft.shopapp.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -9,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -35,7 +35,7 @@ public class UserController {
             @ApiResponse(description = "Data Not Found", responseCode = "404")
     })
     @GetMapping("/getUserByUsername/{username}")
-    public List<User> getUserByUsername(@PathVariable("username") String username) {
+    public Optional<User> getUserByUsername(@PathVariable("username") String username) {
         return userService.getUserByUsername(username);
     }
 
