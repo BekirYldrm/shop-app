@@ -1,14 +1,21 @@
 package com.pinsoft.shopapp.controller;
 
+
+import com.pinsoft.shopapp.dto.GetAllProducts;
+import com.pinsoft.shopapp.dto.GetProductsDetails;
+import com.pinsoft.shopapp.dto.ProductSearch;
 import com.pinsoft.shopapp.entity.Product;
+
 import com.pinsoft.shopapp.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -27,9 +34,8 @@ public class ProductController {
 		})
 
 	@GetMapping("/product")
-	public List<Product> getAllProducts() {
-
-		return productService.getAllProducts();
+	public List<GetAllProducts> getAllProducts() {
+		return productService.getAll();
 
 	}
 
@@ -43,6 +49,14 @@ public class ProductController {
 		return productService.getProductByName(name);
 
 	}
+//	@PreAuthorize("hasRole('ROLE_ADMIN')")
+
+//	@PreAuthorize("hasAuthority('admin')") olmadı bakılacak...
+
+	@GetMapping("/getProductDetails")
+	public List<GetProductsDetails> findAll() {
+		return productService.findAll();
+	}
 	@PostMapping("/addProduct")
 	public String addProduct(@RequestParam("file") MultipartFile file,
 							 @RequestParam("name") String name,
@@ -52,6 +66,18 @@ public class ProductController {
 		productService.addProduct(file, name, price, explanation, categoryName);
 		return " Ürün ekleme başarılı";
 	}
+	@DeleteMapping("/deleteProduct/{id}")
+	public ResponseEntity deleteProduct(@PathVariable int id) {
+		return productService.deleteProduct(id);
+	}
+
+	@GetMapping("/search")
+	public ResponseEntity<List<ProductSearch>> searchProducts(@RequestParam String name) {
+		List<ProductSearch> searchResults = productService.searchProducts(name);
+		return new ResponseEntity<>(searchResults, HttpStatus.OK);
+	}
+
+
 
 
 }

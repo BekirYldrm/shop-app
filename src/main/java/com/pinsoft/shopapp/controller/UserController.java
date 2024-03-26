@@ -1,10 +1,13 @@
 package com.pinsoft.shopapp.controller;
 
+import com.pinsoft.shopapp.dto.DeleteUser;
+
 import com.pinsoft.shopapp.entity.User;
 import com.pinsoft.shopapp.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,12 +43,22 @@ public class UserController {
     }
 
     @PostMapping("/addUser")
-    public String addUser(@RequestParam String username,
-                          @RequestParam String email,
-                          @RequestParam String roleName,
-                          @RequestParam String password) {
+    public ResponseEntity<User> addUser(@RequestParam String username,
+                                        @RequestParam String email,
+                                        @RequestParam String roleName,
+                                        @RequestParam String password) {
         return userService.addUser(username, email, roleName, password);
     }
+    @DeleteMapping("/deleteUser/{id}")
+    public ResponseEntity<DeleteUser> deleteUser(@PathVariable int id) {
+        return userService.deleteUser(id);
+    }
+
+    @PostMapping("/updateUser")
+    public ResponseEntity updateUser(@RequestBody User user){
+        return userService.updateUser(user);
+    }
+
 
 
 }
